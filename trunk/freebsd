@@ -6,3 +6,5 @@ chsh -s /usr/local/bash
 export PACKAGESITE=http://mirrors.163.com/FreeBSD/releases/i386/9.0-RELEASE/packages/Latest/
 MASTER_SITE_BACKUP?=http://mirrors.163.com/FreeBSD/distfiles/${DIST_SUBDIR}/
 MASTER_SITE_OVERRIDE?=${MASTER_SITE_BACKUP}
+ssh-keygen -t dsa -P '' -f ~/.ssh/id_ds
+cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
