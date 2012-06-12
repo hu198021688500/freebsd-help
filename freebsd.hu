@@ -1,0 +1,24 @@
+;
+; BIND data file
+;
+$TTL	604800
+$ORIGIN	freebsd.hu.
+@	IN	SOA	freebsd.hu. host185.freebsd.hu. (
+				2012061210	;Serial
+				604800		;Refresh
+				86400		;Retry
+				2419200		;Expire
+				604800)		;Negative Cache TTL
+
+;DNS server
+	IN	NS	ns	
+	IN	MX	0	mail.freebsd.hu.
+@	IN	A	192.168.35.185
+ns	IN	A	192.168.35.185
+mail	IN	A	192.168.35.185
+host185	IN	A	192.168.35.185
+host186	IN	A	192.168.35.186
+host187	IN	A	192.168.35.187
+host188	IN	A	192.168.35.188
+
+www	IN	CNAME	host185
