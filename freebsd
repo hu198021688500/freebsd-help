@@ -1,0 +1,8 @@
+qx7AY7gZ9Ax7
+kern.maxfiles=40000
+kern.maxfilesperproc=40000
+setenv PACKAGESITE http://mirrors.163.com/FreeBSD/releases/i386/9.0-RELEASE/packages/Latest/
+chsh -s /usr/local/bash
+export PACKAGESITE=http://mirrors.163.com/FreeBSD/releases/i386/9.0-RELEASE/packages/Latest/
+MASTER_SITE_BACKUP?=http://mirrors.163.com/FreeBSD/distfiles/${DIST_SUBDIR}/
+MASTER_SITE_OVERRIDE?=${MASTER_SITE_BACKUP}
