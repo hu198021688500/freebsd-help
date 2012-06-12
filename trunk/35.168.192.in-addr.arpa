@@ -1,0 +1,19 @@
+;
+; BIND reverse data file
+;
+$TTL	604800	
+@	IN	SOA	freebsd.hu. host185.freebsd.hu .(
+				2012061210i	; Serial
+				604800		; Refresh
+				86400		; Retry
+				2419200		; Expire
+				604800)		; Negative Cache TTL
+;
+@	IN	NS	freebsd.hu.
+185	IN	PTR	mail.freebsd.hu.
+185	IN	PTR	www.freebsd.hu.
+185	IN	PTR	ns.freebsd.hu.
+185	IN	PTR	host185.freebsd.hu.
+186	IN	PTR	host186.freebsd.hu.
+187	IN	PTR	host187.freebsd.hu.
+188	IN	PTR	host188.freebsd.hu.
