@@ -6,3 +6,17 @@ chsh -s /usr/local/bash
 export PACKAGESITE=http://mirrors.163.com/FreeBSD/releases/i386/9.0-RELEASE/packages/Latest/
 MASTER_SITE_BACKUP?=http://mirrors.163.com/FreeBSD/distfiles/${DIST_SUBDIR}/
 MASTER_SITE_OVERRIDE?=${MASTER_SITE_BACKUP}
+
+/usr/local/application/user-app/hadoop-1.0.3/bin/start-all.sh
+/usr/local/application/user-app/zookeeper-3.4.3/bin/zkServer.sh start /usr/local/application/user-app/zookeeper-3.4.3/conf/zoo
+/usr/local/application/user-app/hbase-0.92.1/bin/start-hbase.sh --config /usr/local/application/user-conf/hbase-0.92.1/
+/usr/local/application/user-app/cassandra-1.1.1/bin/cassandra
+/usr/local/application/user-app/neo4j-1.7.1/bin/neo4j start
+
+http://host185.freebsd.hu:50070 hadoop hdfs
+http://host185.freebsd.hu:50030 hadoop mapred
+http://host185.freebsd.hu:60010 hbase
+http://host185.freebsd.hu:7474 neo4j
+
+
+/usr/local/application/user-app/hadoop-1.0.3/bin/stop-all.sh
