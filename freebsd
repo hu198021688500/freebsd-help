@@ -1,6 +1,15 @@
 qx7AY7gZ9Ax7
+
+vi /etc/sysctl.conf
 kern.maxfiles=40000
 kern.maxfilesperproc=40000
+ubuntu
+vi /etc/security/limits.conf
+mohadoop        soft    nofile          40000
+mohadoop        hard    nofile          40000
+vi /etc/pam.d/common-session
+session required        pam_limits.so
+
 setenv PACKAGESITE http://mirrors.163.com/FreeBSD/releases/i386/9.0-RELEASE/packages/Latest/
 chsh -s /usr/local/bash
 export PACKAGESITE=http://mirrors.163.com/FreeBSD/releases/i386/9.0-RELEASE/packages/Latest/
@@ -17,6 +26,3 @@ http://host185.freebsd.hu:50070 hadoop hdfs
 http://host185.freebsd.hu:50030 hadoop mapred
 http://host185.freebsd.hu:60010 hbase
 http://host185.freebsd.hu:7474 neo4j
-
-
-/usr/local/application/user-app/hadoop-1.0.3/bin/stop-all.sh
