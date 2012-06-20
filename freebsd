@@ -26,3 +26,11 @@ http://host185.freebsd.hu:50070 hadoop hdfs
 http://host185.freebsd.hu:50030 hadoop mapred
 http://host185.freebsd.hu:60010 hbase
 http://host185.freebsd.hu:7474 neo4j
+
+hadoop 动态添加节点datanode及tasktracker
+1.把新机器的增加到conf/slaves文件中（datanode或者tasktracker crash则可跳过）
+2.在新机器上进入hadoop安装目录
+  $bin/hadoop-daemon.sh start datanode
+  $bin/hadoop-daemon.sh start tasktracker
+3.在namenode上
+  $bin/hadoop balancer
