@@ -34,3 +34,5 @@ hadoop 动态添加节点datanode及tasktracker
   $bin/hadoop-daemon.sh start tasktracker
 3.在namenode上
   $bin/hadoop balancer
+  
+hadoop dfsadmin -safemode leave
