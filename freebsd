@@ -38,3 +38,26 @@ hadoop 动态添加节点datanode及tasktracker
 hadoop dfsadmin -safemode leave
 检查hdfs文件
 hadoop fsck /
+telnet看《星球大战》
+telnet towel.blinkenlights.nl
+列出你最常用的10条命令
+history | awk '{a[$2]++}END{for(i in a){print a[i] "" i}}' | sort -rn | head
+服务器重启完报警
+ping -a ip
+清屏
+clear
+ctrl+l
+利用中间管道嵌套使用ssh
+ssh -t host1 ssh host2
+显示消耗内存最多的10个运行中的进程
+ps aux|sort -nk +4|tail
+用python快速开启一个smtp服务
+python -m smtpd -n -c DebuggingServer localhost:1025
+显示当前目录中所有子目录的大小
+du -h --max-depth=1
+执行一条命令但不保存到history
+<space> command
+复制最后使用的命令中的参数
+ALT + .(or ESC + .)
+用wget的递归方式下载整个网站
+wget --random-wait -r -p -e robots=off -U Mozilla www.example.com
