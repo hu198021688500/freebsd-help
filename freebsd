@@ -67,3 +67,7 @@ vi ./server/func.c
 line 213  #define FDHT_MAX_ALIAS_PREFIX_COUNT  10//default is 4
 vi common/local_ip_func.h
 #define FAST_MAX_LOCAL_IP_ADDRS   10//default is 4
+
+或者设置网卡别名
+vi conf/fdhtd.conf
+if_alias_prefix=eth
