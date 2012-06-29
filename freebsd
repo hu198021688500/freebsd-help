@@ -65,3 +65,5 @@ wget --random-wait -r -p -e robots=off -U Mozilla www.example.com
 FastDHT在FreeBSD上安装，网卡超过其允许的范围解决办法，修改
 vi ./server/func.c
 line 213  #define FDHT_MAX_ALIAS_PREFIX_COUNT  10//default is 4
+vi common/local_ip_func.h
+#define FAST_MAX_LOCAL_IP_ADDRS   10//default is 4
