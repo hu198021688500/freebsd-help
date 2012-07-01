@@ -1,0 +1,16 @@
+ubuntu创建快速启动器的图标
+
+
+cd /home/huguobing/.local/share/applications/
+vi eclipse.desktop
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=Eclipse
+Comment=Eclipse IDE
+Exec=/usr/local/application/eclipse-javaee/eclipse
+Icon=/usr/local/application/eclipse-javaee/icon.xpm
+Terminal=false
+Type=Application
+Categories=GNOME;Application;Development;
+StartupNotify=true
