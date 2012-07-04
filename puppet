@@ -1,0 +1,7 @@
+/etc/init.d/puppetmaster start
+
+puppetd --server host188.freebsd.hu waitforcert 60 --test
+
+puppetca --list --all
+
+puppetca --sign host185.freebsd.hu
