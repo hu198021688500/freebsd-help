@@ -11,3 +11,6 @@ cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
 
 
 portupgrade -arR 升级所有已经安装的软件，并且检查依赖关系
+portsnap fetch update
+vi /etc/portsnap.conf
+SERVERNAME=portsnap.tw.FreeBSD.org
