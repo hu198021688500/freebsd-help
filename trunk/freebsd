@@ -8,3 +8,6 @@ MASTER_SITE_BACKUP?=http://mirrors.163.com/FreeBSD/distfiles/${DIST_SUBDIR}/
 MASTER_SITE_OVERRIDE?=${MASTER_SITE_BACKUP}
 ssh-keygen -t dsa -P '' -f ~/.ssh/id_ds
 cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
+
+
+portupgrade -arR 升级所有已经安装的软件，并且检查依赖关系
