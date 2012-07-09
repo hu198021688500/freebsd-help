@@ -1,0 +1,7 @@
+/usr/local/application/android-sdk-linux/tools/emulator -avd android4.03  -partition-size 256
+./adb devices
+./adb root
+./adb remount
+./adb shell
+./adb pull /system/etc/hosts android_hosts
+./adb push android_hosts /system/etc/hosts
