@@ -73,3 +73,5 @@ vi conf/fdhtd.conf
 if_alias_prefix=eth
 
 make rmconfig
+
+pkg_create -bR
