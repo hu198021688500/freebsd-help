@@ -6,3 +6,8 @@ cd src/org/zeromq/
 cd ../../../
 make
 sudo make install
+
+
+bin/storm nimbus
+bin/storm supervisor
+bin/storm ui
