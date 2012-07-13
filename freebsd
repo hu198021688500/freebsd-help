@@ -75,3 +75,5 @@ if_alias_prefix=eth
 make rmconfig
 
 pkg_create -bR
+
+netstat -an |grep LISTEN |grep :80
