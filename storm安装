@@ -1,0 +1,8 @@
+*** No rule to make target `classdist_noinst.stamp', needed by `org/zeromq/ZMQ.class'.  Stop.
+
+touch src/classdist_noinst.stamp
+cd src/org/zeromq/
+/jzmq/src/org/zeromq]$ javac  *.java
+cd ../../../
+make
+sudo make install
