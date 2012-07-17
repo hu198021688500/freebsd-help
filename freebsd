@@ -77,3 +77,4 @@ make rmconfig
 pkg_create -bR
 
 netstat -an |grep LISTEN |grep :80
+curl -F file=@/home/mohadoop/xxx.log http://www.mo.dev/order/live
