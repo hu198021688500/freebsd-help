@@ -1,0 +1,3 @@
+#ifndef ETIME
+#define ETIME ETIMEDOUT				/* For FreeBSD */
+#endif
