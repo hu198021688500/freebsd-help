@@ -1,3 +1,4 @@
+vi /etc/apache2/sites-enabled/000-default
 <VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 	ServerName www.mo.com
