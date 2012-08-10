@@ -4,3 +4,12 @@
 加快下载速度
 vi /etc/portsnap.conf
 SERVERNAME=portsnap.hshh.org
+
+cd /usr/ports/sysutils/portupgrade
+make install clean
+
+portupgrade -r pkg_name 升级单个软件和与其相关的，其中 pkg_name 是 pkg_info 中显示的名字
+
+portupgrade -ar 就会自动更新全部了。如果加上 P 参数，则先看是否有已经编译好的 pkg 下载，直接从 pkg 升级，省去自己编译。下载站点可以通过修改/usr/local/etc/pkgtools.conf更改
+
+portupgrade -arR 升级所有已经安装的软件，并且检查依赖关系
