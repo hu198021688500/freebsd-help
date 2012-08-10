@@ -4,3 +4,56 @@ auto lo
 iface lo inet loopback
 
 dns-nameservers 192.168.35.185 8.8.8.8 8.8.4.4
+
+
+
+
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+#iface eth0 inet dhcp
+
+iface eth0 inet static
+address 192.168.80.129
+netmask 255.255.255.0
+gateway 192.168.80.2
+
+
+1、配置静态IP地址：
+# vim /etc/network/interfaces
+原内容有如下4行：
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+
+以上表示默认使用DHCP分配IP，修改为如下：
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+#iface eth0 inet dhcp
+iface eth0 inet static
+address 192.168.80.129
+netmask 255.255.255.0
+gateway 192.168.80.2
+保存退出。
+注意：只需要设置address（IP地址）、netmask（子网掩码）、gateway（网关）这三项就OK，network和broadcast这两项参数是可以不写的。
+
+2、手动设置DNS服务器：
+# vim /etc/resolv.conf
+添加如下内容（这点所有Linux发行版都通用）：
+nameserver 192.168.80.2
+nameserver 8.8.8.8
+保存退出。
+注意：重启Ubuntu后发现又不能上网了，问题出在/etc/resolv.conf。重启后，此文件配置的dns又被自动修改为默认值。所以需要永久性修改DNS。方法如下：
+# vim /etc/resolvconf/resolv.conf.d/base
+nameserver 192.168.80.2
+nameserver 8.8.8.8
+
+3、重启networking服务使其生效：
+# /etc/init.d/networking restart
