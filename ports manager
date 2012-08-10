@@ -1,6 +1,6 @@
 第一次使用：portsnap fetch extract
 以后再用：portsnap fetch update
 
-
+加快下载速度
 vi /etc/portsnap.conf
 SERVERNAME=portsnap.hshh.org
