@@ -1,0 +1,6 @@
+/etc/network/interfaces
+
+auto lo
+iface lo inet loopback
+
+dns-nameservers 192.168.35.185 8.8.8.8 8.8.4.4
