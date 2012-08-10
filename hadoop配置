@@ -1,0 +1,17 @@
+ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa
+cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
+
+bin/hadoop namenode -format
+bin/start-all.sh
+
+NameNode - http://localhost:50070/
+JobTracker - http://localhost:50030/
+
+bin/hadoop fs -put conf input
+bin/hadoop jar hadoop-examples-*.jar grep input output 'dfs[a-z.]+'
+
+bin/hadoop fs -get output output
+cat output/*
+
+bin/hadoop fs -cat output/*
+bin/stop-all.sh
