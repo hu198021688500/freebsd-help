@@ -1,0 +1,6 @@
+第一次使用：portsnap fetch extract
+以后再用：portsnap fetch update
+
+
+vi /etc/portsnap.conf
+SERVERNAME=portsnap.hshh.org
