@@ -80,3 +80,6 @@ netstat -an |grep LISTEN |grep :80
 curl -F file=@/home/mohadoop/xxx.log http://www.mo.dev/order/live
 
 curl -F file=@/home/mohadoop/xxx.log  -F key=bac61b901a3b163469718616d9b4c4e2 http://www.mo.dev/order/live
+
+make install clean distclean
+make distclean 清除/usr/ports/distfile文件夹下的文件
