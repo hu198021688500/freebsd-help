@@ -5,3 +5,34 @@ puppetd --server host188.freebsd.hu waitforcert 60 --test
 puppetca --list --all
 
 puppetca --sign host185.freebsd.hu
+
+puppet安装
+1.安装Facter  用来获取客户端系统信息（如hostname,ip,OS-version,fqdn等）
+#cd /usr/local/src
+#wget http://puppetlabs.com/downloads/facter/facter-1.6.0.tar.gz下载最新稳定版facter
+#tar -xvzf facter-1.6.0.tar.gz
+#cd facter-1.6.0
+#ruby install.rb   安装
+#cd ../
+2.安装puppet
+#wget http://puppetlabs.com/downloads/puppet/puppet-latest.tgz 下载最新稳定版puppet。
+#cd puppet-*
+#ruby install.rb安装
+#mkdir /etc/puppet
+#cp conf/auth.conf /etc/puppet/
+#cp conf/namespaceauth.conf /etc/puppet/
+#cp conf/redhat/puppet.conf /etc/puppet/
+#cp conf/redhat/server.init /etc/init.d/puppetmaster
+#chmod +x /etc/init.d/puppetmaster
+3.启动服务端服务
+#puppet master --mkusers
+4.客户端请求服务端认证
+在客户端执行
+#puppetd --genconfig > /etc/puppet/puppet.conf
+#puppet agent --server master.gangpao..com --waitforcert 60 --test
+在服务端执行
+#puppet cert --list   查看客端请求
+agent02.gangpao.com
+#puppet cert --sign agent02.gangpao.com 签发证书
+5.启动客户端服务
+#/etc/init.d/puppet start
