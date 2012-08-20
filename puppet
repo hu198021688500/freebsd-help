@@ -36,3 +36,71 @@ agent02.gangpao.com
 #puppet cert --sign agent02.gangpao.com 签发证书
 5.启动客户端服务
 #/etc/init.d/puppet start
+
+
+FreeBSD
+1.安装
+puppet安装包里面已经包含了puppetd和puppetmaster,也就是已经包含了控制端和被控端的程序
+puppet是用 ruby编写的，所以在安装的时候会自动安装ruby,目前发现puppet无法运行在最新的
+ruby 1.9上，在1.8上运行没有问题
+master01#pkg_add -rv puppet
+node01#pkg_add -rv puppet
+
+2.配置
+2.1 同步时间 ntpdate 0.freebsd.pool.ntp.org (两台服务器的时间必须同步一致)
+2.2 两台服务器的hosts(/etc/hosts)里分别添加对方服务器的hosts主机名对应的ip
+比如:
+/etc/hosts 
+172.16.88.10 master01.mysv.com
+172.16.88.20 node01.mysv.com
+
+如果服务器少的话，可以在hosts里说动添加，但是如果服务器很多的话，建议使用dns服务器
+
+2.3 配置
+安装完成后在/usr/local/etc/puppet就有一些文件了，其中包含了puppet.conf,该文件是puppet
+的核心文件，
+
+首先配置puppet master端，也就是主控端,所有的agent被控端都要连接到主控端上，有主控端根
+据事先配置好的条件(比如主机名，操作系统)，来执行相应的.pp配置
+
+2.3.1 主控端配置:
+master01#vi /usr/local/etc/puppet/puppet.conf
+ [main]
+ logdir = /var/log/puppet #指定日志存放路径
+ rundir = /var/run/puppet #指定了puppet的pid存放路径,也就是进程id号
+ ssldir = $vardir/ssl #$vardir就是/var/puppet/目录{注:不知道这个变量是在哪里定义的}
+ bindaddress = 172.16.88.10 #指定puppet监听哪个ip，如果服务器有内网跟外网ip的话，出于\
+ 安全考虑，监听内网ip
+在/usr/local/etc/puppet下有个manifests目录,该目录为puppet的配置分发的主目录，所有需要分发到
+下面的机器的配置都在这个目录里面，site.pp为入口文件(类似于c的main()入口函数)我们做个简单的配置
+vi site.pp
+node default {
+ file {
+ "/tmp/hellopuppet":
+ content => "内容";
+ }
+ }
+site.pp里面可以使用include和import来包含其他的包，实现不同的机器后者标示，使用不同的配置
+运行puppetmaster
+master01#/usr/local/etc/rc.d/puppetmaster start
+master01#sockstat -l4
+USER COMMAND PID FD PROTO LOCAL ADDRESS FOREIGN ADDRESS
+puppet ruby18 1867 7 tcp4 172.16.88.10:8140 *:*
+2.3.2 puppet agent被控端的配置:
+node01#vi /usr/local/etc/puppet/puppet.conf
+[main]
+logdir = /var/log/puppet #指定日志存放路径
+rundir = /var/run/puppet #指定了puppet的pid存放路径,也就是进程id号
+ssldir = $vardir/ssl #$vardir就是/var/puppet/目录{注:不知道这个变量是在哪里定义的}
+[puppetd]
+classfile = $vardir/classes.txt
+server = master01.servergroup.com #master01主控服务器的域名
+runinterval = 10 #读取间隔，默认是30分钟，这里改为10秒
+运行puppetd agent端程序
+node01#puppet agent --test --server=master01.mysvr.com #第一次运行需要请求证书，等待master端审核通过
+master01#puppetca list --all + master01.mysvr.com (35:11:6D:BC:75:06:8C:FF:69:9A:45:8F:F8:39:84:31) node01.mysvr.com (01:58:5C:CF:5F:D7:4C:2D:57:D2:35:78:50:25:68:80)
+这里看到node01.mysrv.com前面没有加号，表示有请求等待审核通过
+现在我们来验证通过
+puppetca -s node01.mysvr.com 或者 puppetca -s -a (通过所有请求)
+再次请求连接，现在就可以获取master上的.pp配置了，并且运行了
+node01#puppet agent –test –server=master01.mysvr.com #第一次运行需要请求证书，等待master端审核通过
