@@ -111,4 +111,4 @@ node01#puppet agent –test –server=master01.mysvr.com #第一次运行需要�
 warning: Implicit invocation of 'puppet apply' by passing files (or flags) directly
 to 'puppet' is deprecated, and will be removed in the 2.8 series.  Please
 invoke 'puppet apply' directly in the future.
-
+原因是使用了puppet hello.pp请使用puppet apply hello.pp代替之
