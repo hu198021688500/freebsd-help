@@ -104,3 +104,11 @@ master01#puppetca list --all + master01.mysvr.com (35:11:6D:BC:75:06:8C:FF:69:9A
 puppetca -s node01.mysvr.com 或者 puppetca -s -a (通过所有请求)
 再次请求连接，现在就可以获取master上的.pp配置了，并且运行了
 node01#puppet agent –test –server=master01.mysvr.com #第一次运行需要请求证书，等待master端审核通过
+
+出现的问题以及解决方法
+/usr/lib/ruby/1.8/puppet/defaults.rb:75: warning: Insecure world writable dir /usr/local/application in PATH, mode 040777
+需要root权限运行
+warning: Implicit invocation of 'puppet apply' by passing files (or flags) directly
+to 'puppet' is deprecated, and will be removed in the 2.8 series.  Please
+invoke 'puppet apply' directly in the future.
+
