@@ -1,10 +1,10 @@
 /etc/init.d/puppetmaster start
 
-puppetd --server host188.freebsd.hu waitforcert 60 --test
+puppetd --server host188.freebsd.hu waitforcert 60 --test //客户端生成证书并把证书签名请求发送到服务端，生成证书时会把主机名写进证书，所以先要正确设置主机名
 
-puppetca --list --all
+puppetca --list --all //察看是否有客户端证书请求
 
-puppetca --sign host185.freebsd.hu
+puppetca --sign host185.freebsd.hu //对证书请求签名
 
 puppet安装
 1.安装Facter  用来获取客户端系统信息（如hostname,ip,OS-version,fqdn等）
