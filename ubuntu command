@@ -1,1 +1,5 @@
 sudo /etc/init.d/networking restar
+解决ubuntu输入法图标不显示
+gconftool --type boolean -s /desktop/ibus/panel/show_icon_on_systray true
+gconftool --type boolean -s /desktop/ibus/panel/show true
+gsettings set com.canonical.Unity.Panel systray-whitelist "['all']"
