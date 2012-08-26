@@ -1,0 +1,40 @@
+ 1、添加这个源：
+deb http://us.archive.ubuntu.com/ubuntu/ hardy multiverse。
+方法：
+sudo gedit /etc/apt/sources.list
+打开源列表，在最后一行添加
+deb http://us.archive.ubuntu.com/ubuntu/ hardy multiverse。保存退出。
+2、sudo apt-get update
+3、sudo apt-get install sun-java6-jdk
+4，
+配置默认的java 版本
+root@ubuntu:/etc/apt# sudo update-alternatives --config java
+There are 2 choices for the alternative java (providing /usr/bin/java).
+
+
+  Selection    Path                                            Priority   Status
+------------------------------------------------------------
+* 0            /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java   1061      auto mode
+  1            /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java   1061      manual mode
+  2            /usr/lib/jvm/java-6-sun/jre/bin/java             63        manual mode
+
+
+Press enter to keep the current choice[*], or type selection number: 2
+update-alternatives: using /usr/lib/jvm/java-6-sun/jre/bin/java to provide /usr/bin/java (java) in manual mode.
+root@ubuntu:/etc/apt# java -version
+java version "1.6.0_06"
+Java(TM) SE Runtime Environment (build 1.6.0_06-b02)
+Java HotSpot(TM) 64-Bit Server VM (build 10.0-b22, mixed mode)
+
+#!/bin/sh
+sudo add-apt-repository "deb http://archive.canonical.com/ lucid partner"
+sudo add-apt-repository "deb-src http://archive.canonical.com/ubuntu lucid partner"
+sudo apt-get update
+
+sudo apt-get -y install git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev libc6-dev lib32ncurses5-dev ia32-libs x11proto-core-dev libx11-dev lib32readline5-dev lib32z-dev libgl1-mesa-dev g++-multilib mingw32 tofrodos
+
+sudo apt-get -y install sun-java6-jdk
+sudo apt-get -y install thunderbird
+sudo apt-get -y install subversion
+sudo apt-get -y install gedit-latex-plugin gedit-plugins
+sudo apt-get -y install wine gtkterm stardict-gnome ghex p7zip p7zip-rar vim-gnome emacs23-gtk exuberant-ctags cscope indent astyle openssh-server
