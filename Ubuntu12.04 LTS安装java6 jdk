@@ -1,3 +1,4 @@
+OpenJDK不适合用来开发，所以安装sun的JDK。
 1、添加这个源：
 deb http://us.archive.ubuntu.com/ubuntu/ hardy multiverse。
 方法：
