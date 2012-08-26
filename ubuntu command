@@ -3,3 +3,5 @@ sudo /etc/init.d/networking restar
 gconftool --type boolean -s /desktop/ibus/panel/show_icon_on_systray true
 gconftool --type boolean -s /desktop/ibus/panel/show true
 gsettings set com.canonical.Unity.Panel systray-whitelist "['all']"
+
+http://wiki.ubuntu.org.cn/IBus
