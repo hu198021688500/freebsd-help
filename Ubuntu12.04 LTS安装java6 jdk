@@ -1,4 +1,4 @@
- 1、添加这个源：
+1、添加这个源：
 deb http://us.archive.ubuntu.com/ubuntu/ hardy multiverse。
 方法：
 sudo gedit /etc/apt/sources.list
@@ -6,18 +6,14 @@ sudo gedit /etc/apt/sources.list
 deb http://us.archive.ubuntu.com/ubuntu/ hardy multiverse。保存退出。
 2、sudo apt-get update
 3、sudo apt-get install sun-java6-jdk
-4，
-配置默认的java 版本
+4、配置默认的java 版本
 root@ubuntu:/etc/apt# sudo update-alternatives --config java
 There are 2 choices for the alternative java (providing /usr/bin/java).
-
-
   Selection    Path                                            Priority   Status
 ------------------------------------------------------------
 * 0            /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java   1061      auto mode
   1            /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java   1061      manual mode
   2            /usr/lib/jvm/java-6-sun/jre/bin/java             63        manual mode
-
 
 Press enter to keep the current choice[*], or type selection number: 2
 update-alternatives: using /usr/lib/jvm/java-6-sun/jre/bin/java to provide /usr/bin/java (java) in manual mode.
