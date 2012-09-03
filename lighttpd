@@ -1,0 +1,3 @@
+./configure --prefix=/usr/local/application/lighttpd-1.4.28 IMAGEMAGICKCONFIG=/usr/local/application/ImageMagick-6.7.6-5/bin/MagickCore-config
+
+make CFLAGS="-I /usr/local/include/fastdfs -I/usr/local/include/fastcommon/ -I/usr/local/application/ImageMagick-6.7.6-5/include/ImageMagick/ $CFLAGS" install clean
