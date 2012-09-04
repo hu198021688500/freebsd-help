@@ -83,3 +83,5 @@ curl -F file=@/home/mohadoop/xxx.log  -F key=bac61b901a3b163469718616d9b4c4e2 ht
 
 make install clean distclean
 make distclean 清除/usr/ports/distfile文件夹下的文件
+
+valgrind --tool=memcheck --leak-check=full --show-reachable=yes  /root/software/fastdfs/lighttpd-1.4.28-fastdfs-hugb-install/sbin/lighttpd  -f /root/software/fastdfs/lighttpd-1.4.28-fastdfs-hugb-install/conf/lighttpd.conf
