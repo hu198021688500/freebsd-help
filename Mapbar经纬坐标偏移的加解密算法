@@ -1,0 +1,198 @@
+    经纬度加密算法如下：(PHP版)
+
+/** 
+     * 将真实地理坐标加密为Mapbar经纬度坐标 
+     * 
+     * @param $x 经度值 
+     * @param $y 维度值 
+     * @returns array 
+     */  
+    function coordOffsetEncrypt($x,$y){  
+        $x = floatval($x)*100000%36000000;  
+        $y = floatval($y)*100000%36000000;  
+      
+        $_X = intval(((cos($y/100000))*($x/18000))+((sin($x/100000))*($y/9000))+$x);  
+        $_Y = intval(((sin($y/100000))*($x/18000))+((cos($x/100000))*($y/9000))+$y);  
+      
+        return array($_X/100000.0,$_Y/100000.0);  
+    }  
+
+经纬坐标加密算法(Javascript版)
+
+    /** 
+     * 将真实地理坐标加密为Mapbar经纬度坐标 
+     * 
+     * @param x 经度值 
+     * @param y 维度值 
+     * @returns [x,y] 
+     */  
+    function coordOffsetEncrypt(x,y){  
+        x = parseFloat(x)*100000%36000000;  
+        y = parseFloat(y)*100000%36000000;  
+      
+        _X = intval(((Math.cos(y/100000))*(x/18000))+((Math.sin(x/100000))*(y/9000))+x);  
+        _Y = intval(((Math.sin(y/100000))*(x/18000))+((Math.cos(x/100000))*(y/9000))+y);  
+      
+        return [_X/100000.0,_Y/100000.0];  
+    }  
+
+经纬度坐标解密算法(PHP版)
+    /** 
+     * 将Mapbar经纬坐标解密为真实地理坐标 
+     * 
+     * @param $x 经度值 
+     * @param $y 维度值 
+     * @returns array 
+     */  
+    function croodOffsetDecrypt($x,$y){  
+        $x = floatval($x)*100000%36000000;  
+        $y = floatval($y)*100000%36000000;  
+      
+        $x1 = intval(-(((cos($y/100000))*($x/18000))+((sin($x/100000))*($y/9000)))+$x);  
+        $y1 = intval(-(((sin($y/100000))*($x/18000))+((cos($x/100000))*($y/9000)))+$y);  
+      
+        $x2 = intval(-(((cos($y1/100000))*($x1/18000))+((sin($x1/100000))*($y1/9000)))+$x+(($x>0)?1:-1));  
+        $y2 = intval(-(((sin($y1/100000))*($x1/18000))+((cos($x1/100000))*($y1/9000)))+$y+(($y>0)?1:-1));  
+      
+        return array($x2/100000.0,$y2/100000.0);  
+    }  
+
+经纬度坐标解密算法(Javascript版)
+    /** 
+     * 将Mapbar经纬坐标解密为真实地理坐标 
+     * 
+     * @param x 经度值 
+     * @param y 维度值 
+     * @returns [x,y] 
+     */  
+    function croodOffsetDecrypt(x,y){  
+        x = parseFloat(x)*100000%36000000;  
+        y = parseFloat(y)*100000%36000000;  
+      
+        x1 = parseInt(-(((Math.cos(y/100000))*(x/18000))+((Math.sin(x/100000))*(y/9000)))+x);  
+        y1 = parseInt(-(((Math.sin(y/100000))*(x/18000))+((Math.cos(x/100000))*(y/9000)))+y);  
+      
+        x2 = parseInt(-(((Math.cos(y1/100000))*(x1/18000))+((Math.sin(x1/100000))*(y1/9000)))+x+((x>0)?1:-1));  
+        y2 = parseInt(-(((Math.sin(y1/100000))*(x1/18000))+((Math.cos(x1/100000))*(y1/9000)))+y+((y>0)?1:-1));  
+      
+        return [x2/100000.0,y2/100000.0];  
+    }  
+
+poi解密(PHP版)
+function pos_decode($pos) {
+    $index = -1;
+    $count = 0;
+    $code = "";
+    $len = strlen($pos);
+    $apiKey = ord($pos[$len - 1]);
+    $pos = substr($pos, 0, $len - 1);
+    $len--;
+    for ($i = 0; $i < $len; $i++) {
+        $hash = intval($pos[$i], 36) - 10;
+        if ($hash >= 10) {
+            $hash = $hash - 7;
+        }
+        $code .= base_convert($hash, 10, 36);
+        if ($hash > $count) {
+            $index = $i;
+            $count = $hash;
+        }
+    }
+    $subLL = intval(substr($code, 0, $index), 16);
+    $addLL = intval(substr($code, $index + 1), 16);
+    $lng = ($subLL + $addLL - intval($apiKey)) / 2;
+    $lat = ($addLL - $lng) / 100000.0;
+    $lng /= 100000.0;
+
+    return array($lat, $lng);
+}
+poi解密(Javascript版)
+function (poi) {
+        if (DP.isObject(poi)) {
+            return poi;
+        };
+        var _options = this.options,
+            index = -1,
+            count = 0,
+            code = "",
+            len = poi.length,
+            apiKey = poi.charCodeAt(len - 1),
+            hash,
+            subLL, addLL,
+            lng, lat;
+        poi = poi.substring(0, len - 1);
+        len--;
+        for (var i = 0; i < len; i++) {
+            hash = parseInt(poi.charAt(i), _options.settings.cha) - _options.settings.add;
+            if (hash >= _options.settings.add) {
+                hash = hash - _options.settings.plus;
+            };
+            code += (hash).toString(_options.settings.cha);
+            if (hash > count) {
+                index = i;
+                count = hash;
+            };
+        }
+        subLL = parseInt(code.substring(0, index), _options.settings.digi);
+        addLL = parseInt(code.substring(index + 1), _options.settings.digi);
+        lng = (subLL + addLL - parseInt(apiKey)) / 2;
+        lat = (addLL - lng) / 100000.0;
+        lng /= 100000.0;
+        return { "lat": lat, "lng": lng };
+    }
+
+因为有一朋友问起这个问题，我找了下，今天就发出来看看吧，不知道说的对不对。
+不过对于Mapbar这样处理的方法我个人觉得还是很值得学习的，至少不会给你明码的坐标。
+不知道Mapbar的朋友看了会不会找我说我那，呵呵，不过没关系，最近想写篇文章给你们些个人的小小的建议，觉得说的不好也无妨。忙完这阵子就写。
+
+下面是Mapbar中的加密和解密部分的JS，我做了简单说明了，什么36进制又16进制的，看的我也头晕。
+实例的结果是这样的：
+IJSDSBWVJABFA解密后的值：121.46979,31.23245
+31.23245，121.46979加密后的值：IJSDSBZVJABFA
+当然你也可以用其他坐标来测试和检验。
+友情提醒：Mapbar中的那个常量值可能已经变动了，用现在方法解出来的和百度的值是不一样的。
+下面的代码复制后保存为网页形式就可以看到效果。
+
+<script language="javascript">
+//一个常量但变动后加密解密的值会变动
+var strLicenseKey = 699;
+//解密坐标
+function jiemi(meT){
+var W7pj=-1;
+var I524S=0;
+var qk_X='';
+for(var i=0;i<meT.length;i++){var j86T=parseInt(meT.charAt(i),36)-10;
+if(j86T>=10)j86T=j86T-7;qk_X+=(j86T).toString(36);
+if(j86T>I524S){W7pj=i;I524S=j86T}}var U8T=parseInt(qk_X.substring(0,W7pj),16);
+var f9v8D=parseInt(qk_X.substring(W7pj+1),16);
+var H1433=new Array();
+H1433[0]=(U8T+f9v8D-parseInt(strLicenseKey))/2;
+H1433[1]=(f9v8D-H1433[0])/100000.0;
+H1433[0]/=100000.0;
+return H1433};
+//解密坐标的实例
+document.write('这是IJSDSBWVJABFA解密后的值：<br>'+jiemi('IJSDSBWVJABFA')+'<br><br>');
+//加密坐标
+function jiami(e53,B92_)
+    {
+        var WVd94=parseInt(parseFloat(e53)*100000);
+        var j7_2=parseInt(parseFloat(B92_)*100000);
+        var rpB=(j7_2-WVd94+parseInt(strLicenseKey)).toString(16);
+        var ie9=(j7_2+WVd94).toString(16);
+        var H1433='';
+        for(var i=0;i<rpB.length;i++)
+        {
+            var k6A36=parseInt(rpB.charAt(i),16);
+            H1433+=(((k6A36>=10)?(k6A36+7):k6A36)+10).toString(36)
+        }
+        H1433+='z';
+        for(var i=0;i<ie9.length;i++)
+        {
+            var k6A36=parseInt(ie9.charAt(i),16);
+            H1433+=(((k6A36>=10)?(k6A36+7):k6A36)+10).toString(36)
+        }
+        return H1433.toUpperCase()
+    }
+//加密实例
+document.write('这是31.23245，121.46979加密后的值：<br>'+jiami('31.23245','121.46979'));    
+</script>
