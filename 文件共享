@@ -1,0 +1,32 @@
+假定您的网络连接已经正确设定好。
+网络主机的 IP: 192.168.0.1
+网络主机的使用者名称: myusername
+网络主机的登录密码: mypassword
+分享中的目录名称: linux
+主机上要挂载的目录: /media/sharename
+
+要挂载网络共享目录时
+sudo mkdir /media/sharename
+sudo mount //192.168.0.1/linux /media/sharename/ -o username=myusername,password=mypassword,dmask=777,fmask=777
+
+要卸载网络共享目录时
+sudo umount /media/sharename/
+
+注意"dir_mode=0777,file_mode=777"，如果是需要将权限代码777前加0，变成0777，这样权限分配才能成功，否则root身份挂载了文件夹后，普通用户还是无法访问该文件夹
+sudo mkdir /mnt/share
+然后就把共享目录持载进去。
+服务器：192.168.6.84
+共享名：gg
+用户名：administrator
+密　码：123
+命令如下：
+sudo mount //192.168.6.84/gg /mnt/share/ -o iocharset=utf8,username=administrator,password=123,dmask=777,fmask=777,codepage=cp936,uid=0
+加上iocharset＝uf8与codepage＝cp936。这样挂载好了后，就可以使用了，可以解决中文文件名的乱码问题。
+======================更简单访问windows目录=============================
+
+1、安装samba和smbfs
+
+sudo apt-get install samba
+sudo apt-get install smbfs
+
+2、打开一个文件浏览窗口，按快捷键ctrl + L，输入smb://192.168.0.*既可以访问windows的共享目录了。当然会要求输入访问用户名和密码，正确输入后就可以访问了。
