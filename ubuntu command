@@ -5,3 +5,9 @@ gconftool --type boolean -s /desktop/ibus/panel/show true
 gsettings set com.canonical.Unity.Panel systray-whitelist "['all']"
 
 http://wiki.ubuntu.org.cn/IBus
+
+
+# mount  -t vfat /dev/sdb1 /media/u 
+ cd /media/u  访问U盘了
+
+sudo umount  /media/u U盘卸载了
