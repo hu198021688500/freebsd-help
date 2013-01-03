@@ -86,3 +86,6 @@ make distclean 清除/usr/ports/distfile文件夹下的文件
 
 valgrind --tool=memcheck --leak-check=full --show-reachable=yes  /root/software/fastdfs/lighttpd-1.4.28-fastdfs-hugb-install/sbin/lighttpd  -f /root/software/fastdfs/lighttpd-1.4.28-fastdfs-hugb-install/conf/lighttpd.conf
 mvn package -X -e -Dmaven.test.skip=true
+
+sudo find / -regex  '密级|机密|秘密|重大秘密'
+sudo find / -regex '.*\.doc\*\|.*\.pdf\|.*\.log\|.*\.txt' | xargs grep '密级|机密|秘密|重大秘密'
