@@ -1,0 +1,12 @@
+bundle install successful for cloud_controller
+bundle install successful for dea
+bundle install successful for health_manager
+bundle install successful for router
+bundle install successful for redis
+bundle install successful for mysql
+bundle install successful for mongodb
+bundle install successful for postgresql
+bundle install successful for neo4j
+bundle install successful for rabbit
+bundle install successful for memcached
+bundle install successful for elasticsearch
