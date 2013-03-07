@@ -14,3 +14,8 @@ portupgrade -arR 升级所有已经安装的软件，并且检查依赖关系
 portsnap fetch update
 vi /etc/portsnap.conf
 SERVERNAME=portsnap.tw.FreeBSD.org
+
+$ git remote set-url --push origin https://username:password@code.google.com/p/project/
+$ git remote -v
+origin  https://username@code.google.com/p/project/ (fetch)
+origin  https://username:password@code.google.com/p/project/ (push)
